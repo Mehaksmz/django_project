@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Charts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            width: 700px;
+            height: 500px;
+            margin: 30px auto;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6fa;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h2>Employees per Department</h2>
+    <div class="chart-container">
+        <canvas id="deptChart"></canvas>
+    </div>
+    <h2>Monthly Attendance Overview</h2>
+    <div class="chart-container">
+        <canvas id="attendanceChart"></canvas>
+    </div>
+
+    <script>
+        // Pie chart
+        fetch('/api/charts/employees-per-department/')
+            .then(res => res.json())
+            .then(data => {
+                const ctx = document.getElementById('deptChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: '# of Employees',
+                            data: data.data,
+                            backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom' }
+                        }
+                    }
+                });
+            });
+
+        // Bar chart
+        fetch('/api/charts/monthly-attendance/')
+            .then(res => res.json())
+            .then(data => {
+                const ctx = document.getElementById('attendanceChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: 'Attendance Count',
+                            data: data.data,
+                            backgroundColor: '#36A2EB'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: { beginAtZero: true }
+                        }
+                    }
+                });
+            });
+    </script>
+</body>
+</html>

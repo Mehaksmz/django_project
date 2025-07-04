@@ -8,9 +8,9 @@ class Department(models.Model):
 
 class Employee(models.Model):
     name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    phone = models.CharField(max_length=15)
-    address = models.TextField()
+    email = models.EmailField(max_length=100, unique=True)
+    phone = models.CharField(max_length=30)
+    address = models.TextField(max_length=255)
     date_joined = models.DateField()
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='employees')
 

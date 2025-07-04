@@ -19,6 +19,9 @@ from django.urls import path, include
 from rest_framework.documentation import include_docs_urls
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from employees.views import employees_per_department, monthly_attendance
+from django.views.generic import TemplateView
+
 
 schema_view = get_schema_view(openapi.Info(title="Employee API", default_version='v1'), public=True)
 
@@ -33,5 +36,12 @@ urlpatterns = [
     path('api/', include('attendance.urls')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh')
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+     # Chart API endpoints
+    path('api/charts/employees-per-department/', employees_per_department),
+    path('api/charts/monthly-attendance/', monthly_attendance),
+
+    # HTML page with embedded charts
+    path('charts/', TemplateView.as_view(template_name='charts.html')),
 ]
