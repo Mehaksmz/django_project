@@ -3,7 +3,6 @@ from faker import Faker
 import random
 from employees.models import Employee, Department, Performance
 from attendance.models import Attendance
-from datetime import datetime, timedelta
 
 fake = Faker()
 
