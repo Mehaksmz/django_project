@@ -30,30 +30,8 @@ It allows you to manage employees, departments, attendance, and performance, wit
 - Filtering: django-filter
 - Visualization: Chart.js 
 
-## Folder Structure
-employee_project/
-├── employees/ # Employee app
-│ ├── models.py
-│ ├── serializers.py
-│ ├── views.py
-│ ├── urls.py
-│ └── management/commands/seed_data.py
-├── attendance/ # Attendance app
-│ ├── models.py
-│ ├── serializers.py
-│ ├── views.py
-│ └── urls.py
-├── employee_project/ # Project settings
-│ ├── settings.py
-│ ├── urls.py
-│ └── wsgi.py
-├── templates/
-│ └── charts.html #  Chart.js visualizations
-├── requirements.txt
-├── .env.example
-├── manage.py
-└── README.md
-
+## Project Structure
+![Folder Structure](assets/structure.png)
 
 ##  Setup Instructions
 
